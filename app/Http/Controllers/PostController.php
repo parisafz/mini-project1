@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Factory;
 use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\User;
 
 
 class PostController extends Controller
@@ -15,8 +13,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        Post::factory()->count(20)->create();
-        return view('welcome');
+        // Post::factory()->count(20)->create();
+        // return view('welcome');
+
+        $posts = Post::all();
+
+        return view('post.index', compact('posts'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -32,7 +34,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Post::create($request->all());
+
+        return redirect()->route('post.index')->with('success', 'record created successfully');
     }
 
     /**
@@ -40,7 +44,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('post.show');
     }
 
     /**
@@ -48,7 +52,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('post.edit');
     }
 
     /**
