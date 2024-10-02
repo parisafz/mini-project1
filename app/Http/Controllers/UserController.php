@@ -12,8 +12,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        User::factory()->count(20)->create();
-        return view('welcome');
+        //
     }
 
     /**

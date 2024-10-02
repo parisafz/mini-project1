@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left text-center">
+            <div class="text-center">
                 <h2>ساخت پست جدید</h2>
             </div>
             <div class="pull-right d-flex">

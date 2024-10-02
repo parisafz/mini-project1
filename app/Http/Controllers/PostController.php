@@ -13,9 +13,6 @@ class PostController extends Controller
      */
     public function index()
     {
-        // Post::factory()->count(20)->create();
-        // return view('welcome');
-
         $posts = Post::all();
 
         return view('post.index', compact('posts'));
@@ -34,6 +31,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string',
+            'body' => 'required|string',
+        ]);
+
         Post::create($request->all());
 
         return redirect()->route('post.index')->with('success', 'record created successfully');
@@ -42,32 +44,42 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        return view('post.show');
+        return view('post.show', compact('post'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        return view('post.edit');
+        return view('post.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'body' => 'required|string',
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+
+        return redirect()->route('post.index')->with('success', 'record updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('post.index')->with('success', 'record deleted successfully');
     }
 }

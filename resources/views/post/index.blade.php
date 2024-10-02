@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left p-2 text-center">
+            <div class="p-2 text-center">
                 <h2>mini project</h2>
             </div>
             <div class="pull-right d-flex">
@@ -36,9 +36,13 @@
                 <td>{{ $post->user_id }}</td>
                 <td>{{ substr($post->body, 0, 30) . '...' }}</td>
                 <td>
-                    <form action="" method="POST">
+                    <form action="{{ route('post.destroy', $post->id) }}" method="POST">
                         <a class="btn btn-info" href="{{ route('post.show', $post->id) }}">نمایش</a>
                         <a class="btn btn-primary" href="{{ route('post.edit', $post->id) }}">ویرایش</a>
+
+                        @csrf
+
+                        @method('delete')
                         <button type="submit" class="btn btn-danger">حذف</button>
                     </form>
                 </td>
