@@ -33,7 +33,7 @@
             <tr>
                 <td>{{ $post->id }}</td>
                 <td>{{ substr($post->title, 0, 30) . '...' }}</td>
-                <td>{{ $post->user_id }}</td>
+                <td>{{ $post->user->full_name }}</td>
                 <td>{{ substr($post->body, 0, 30) . '...' }}</td>
                 <td>
                     <form action="{{ route('post.destroy', $post->id) }}" method="POST">
