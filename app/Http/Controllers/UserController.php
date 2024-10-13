@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
+/**
+ * کنترلر UserController برای مدیریت کاربران.
+ *
+ * این کنترلر عملیات CRUD (ایجاد، خواندن، بروزرسانی و حذف) را برای کاربران فراهم می‌کند.
+ */
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * نمایش لیستی از کاربران.
      */
     public function index()
     {
@@ -16,15 +22,33 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * نمایش فرم برای ایجاد یک کاربر جدید.
      */
     public function create()
     {
-        //
+        // // اطلاعات کاربر جدید
+        // $userData = [
+        //     'first_name' => 'Test User',
+        //     'last_name' => 'lTest User',
+        //     'email' => 'test@example.com',
+        //     'password' => Hash::make('mypassword'), // پسورد دلخواه
+        // ];
+
+        // // ایجاد کاربر جدید
+        // $user = User::create($userData);
+        // $user->save();
+        // // بررسی موفقیت‌آمیز بودن عملیات
+        // if ($user) {
+        //     echo "کاربر با موفقیت ایجاد شد: " . $user->email;
+        // } else {
+        //     echo "ایجاد کاربر با خطا مواجه شد.";
+        // }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ذخیره یک کاربر جدید در پایگاه‌داده.
+     *
+     * @param \Illuminate\Http\Request $request
      */
     public function store(Request $request)
     {
@@ -32,7 +56,9 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * نمایش یک کاربر مشخص.
+     *
+     * @param string $id
      */
     public function show(string $id)
     {
@@ -40,7 +66,9 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * نمایش فرم برای ویرایش یک کاربر مشخص.
+     *
+     * @param string $id
      */
     public function edit(string $id)
     {
@@ -48,7 +76,10 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * بروزرسانی یک کاربر مشخص در پایگاه‌داده.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param string $id
      */
     public function update(Request $request, string $id)
     {
@@ -56,7 +87,9 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * حذف یک کاربر مشخص از پایگاه‌داده.
+     *
+     * @param string $id
      */
     public function destroy(string $id)
     {

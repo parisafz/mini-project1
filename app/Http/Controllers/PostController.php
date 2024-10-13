@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
-
+/**
+ * کنترلر PostController برای مدیریت پست‌ها.
+ *
+ * این کنترلر عملیات CRUD (ایجاد، خواندن، بروزرسانی و حذف) را برای پست‌ها فراهم می‌کند.
+ */
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * نمایش لیستی از پست‌ها.
      */
     public function index()
     {
@@ -19,7 +23,7 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * نمایش فرم برای ایجاد یک پست جدید.
      */
     public function create()
     {
@@ -27,7 +31,9 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ذخیره یک پست جدید در پایگاه‌داده.
+     *
+     * @param \Illuminate\Http\Request $request
      */
     public function store(Request $request)
     {
@@ -42,7 +48,9 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * نمایش یک پست مشخص.
+     *
+     * @param \App\Models\Post $post
      */
     public function show(Post $post)
     {
@@ -50,7 +58,9 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * نمایش فرم برای ویرایش یک پست مشخص.
+     *
+     * @param \App\Models\Post $post
      */
     public function edit(Post $post)
     {
@@ -58,7 +68,10 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * بروزرسانی یک پست مشخص در پایگاه‌داده.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      */
     public function update(Request $request, $id)
     {
@@ -74,7 +87,9 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * حذف یک پست مشخص از پایگاه‌داده.
+     *
+     * @param \App\Models\Post $post
      */
     public function destroy(Post $post)
     {

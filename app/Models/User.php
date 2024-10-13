@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * کلاس User نمایانگر مدل کاربر در پایگاه‌داده است.
+ *
+ * این کلاس مسئول مدیریت ویژگی‌ها و روابط مربوط به کاربران می‌باشد.
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * ویژگی‌هایی که قابل پر کردن هستند.
      *
      * @var array<int, string>
      */
@@ -20,10 +24,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'api_token'
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * ویژگی‌هایی که باید در هنگام سریالیزه کردن مخفی شوند.
      *
      * @var array<int, string>
      */
@@ -33,7 +38,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * ویژگی‌هایی که باید تبدیل شوند.
      *
      * @return array<string, string>
      */
@@ -46,7 +51,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get all of the posts for the user.
+     * دریافت تمام پست‌ها برای کاربر.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -56,7 +61,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the full name of the user.
+     * دریافت نام کامل کاربر.
      *
      * @return string
      */

@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
 /**
+ * کلاس PostFactory برای تولید نمونه‌های تصادفی از مدل Post استفاده می‌شود.
+ *
+ * این کلاس به شما امکان می‌دهد تا داده‌های تستی برای مدل پست ایجاد کنید.
+ *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
 class PostFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * تعریف وضعیت پیش‌فرض مدل.
      *
      * @return array<string, mixed>
      */

@@ -7,34 +7,42 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
+ * کلاس UserFactory برای تولید نمونه‌های تصادفی از مدل User استفاده می‌شود.
+ *
+ * این کلاس به شما امکان می‌دهد تا داده‌های تستی برای مدل کاربر ایجاد کنید.
+ *
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * رمز عبور فعلی که توسط کارخانه استفاده می‌شود.
+     *
+     * @var string|null
      */
     protected static ?string $password;
 
     /**
-     * Define the model's default state.
+     * تعریف وضعیت پیش‌فرض مدل.
      *
      * @return array<string, mixed>
      */
     public function definition(): array
     {
         return [
-            'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(), // تاریخ تأیید ایمیل
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * مشخص کردن اینکه آدرس ایمیل مدل باید تأیید نشده باشد.
+     *
+     * @return static
      */
     public function unverified(): static
     {
