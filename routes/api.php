@@ -66,8 +66,11 @@ Route::post('login', function (Request $request) {
     ], 401);
 });
 
-
-
+/**
+ * تعریف مسیر خروج کاربر.
+ *
+ * این مسیر برای خروج کاربر استفاده می‌شود.
+ */
 Route::middleware('auth:api')->post('logout', function (Request $request) {
     if (Auth::user()) {
         $user = Auth::user();

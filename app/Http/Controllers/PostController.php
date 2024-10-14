@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * کنترلر PostController برای مدیریت پست‌ها.
@@ -37,10 +38,30 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             'body' => 'required|string',
+            'user_id' => 'required|integer',
+            'image' => 'required|image'
+        ], [
+            'title.required' => 'لطفاً عنوان را وارد کنید.',
+            'body.required' => 'لطفاً متن پست را وارد کنید.',
+            'user_id.required' => 'لطفاً شناسه نویسنده را وارد کنید.',
+            'image.required' => 'لطفاً یک تصویر معتبر انتخاب کنید.'
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        }
+
+        // $request->validate([
+        //     'title' => 'required|string',
+        //     'body' => 'required|string',
+        // ]);
+
+        $fileName = time() . '.' . $request->image->extension();
+
+        $request->image->move(public_path('uploads'), $fileName);
 
         Post::create($request->all());
 

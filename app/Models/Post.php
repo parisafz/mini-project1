@@ -15,7 +15,7 @@ class Post extends Model
     use HasFactory;
 
     // ویژگی‌های قابل پر کردن
-    protected $fillable = ['title', 'body', 'user_id'];
+    protected $fillable = ['title', 'body', 'user_id', 'image'];
 
     /**
      * تعریف رابطه بین پست و کاربر.
