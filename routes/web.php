@@ -1,19 +1,27 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/**
- * تعریف مسیرهای وب برای برنامه.
- */
 
-// مسیر برای نمایش صفحه خوش‌آمدگویی
 Route::get('/', function () {
-    return view('welcome'); // بازگشت به نمای خوش‌آمدگویی
+    return view('welcome');
 });
 
-// تعریف مسیرهای منبع برای مدل پست
 Route::resource('post', PostController::class);
 
 Route::resource('user', UserController::class);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';

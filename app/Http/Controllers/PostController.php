@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Validator;
@@ -36,29 +37,33 @@ class PostController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string',
-            'body' => 'required|string',
-            'user_id' => 'required|integer',
-            'image' => 'required|image'
-        ], [
-            'title.required' => 'لطفاً عنوان را وارد کنید.',
-            'body.required' => 'لطفاً متن پست را وارد کنید.',
-            'user_id.required' => 'لطفاً شناسه نویسنده را وارد کنید.',
-            'image.required' => 'لطفاً یک تصویر معتبر انتخاب کنید.'
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'title' => 'required|string',
+        //     'body' => 'required|string',
+        //     'user_id' => 'required|integer',
+        //     'image' => 'required|image'
+        // ], [
+        //     'title.required' => 'لطفاً عنوان را وارد کنید.',
+        //     'body.required' => 'لطفاً متن پست را وارد کنید.',
+        //     'user_id.required' => 'لطفاً شناسه نویسنده را وارد کنید.',
+        //     'image.required' => 'لطفاً یک تصویر معتبر انتخاب کنید.'
+        // ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
-        }
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator);
+        // }
 
         // $request->validate([
         //     'title' => 'required|string',
         //     'body' => 'required|string',
         // ]);
 
+        // $validated = $request->validated();
+        // dd($validated);
+
+        // dd($request->image);
         $fileName = time() . '.' . $request->image->extension();
 
         $request->image->move(public_path('uploads'), $fileName);
