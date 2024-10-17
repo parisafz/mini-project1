@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiPostController;
 use illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Api\ApiUserController;
 
 /**
  * تعریف مسیرهای API برای برنامه.
@@ -27,6 +28,8 @@ Route::namespace('App\Http\Controllers\Api')->group(function () {
     // تعریف مسیرهای API برای مدل کامنت
     Route::apiResource('/comments', 'ApiCommentController');
 });
+
+Route::apiResource('/users', ApiUserController::class);
 
 /**
  * تعریف مسیر fallback برای مدیریت درخواست‌های نامعتبر.

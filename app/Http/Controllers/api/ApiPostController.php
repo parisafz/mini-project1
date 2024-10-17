@@ -39,9 +39,9 @@ class ApiPostController extends Controller
 
         // return Post::find(7);
 
-        // return new PostCollection(Post::with('comments')->get());
+        return new PostCollection(Post::with('comments')->get());
 
-        return new PostCollection(Post::all());
+        // return new PostCollection(Post::all());
     }
 
     /**
@@ -81,7 +81,9 @@ class ApiPostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        $post->update($request->only(['title']));
+        $post->update($request->all());
+
+        return response()->json($post, 200);
     }
 
     /**
